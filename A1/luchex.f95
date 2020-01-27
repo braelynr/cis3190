@@ -1,26 +1,31 @@
       program luc
-
+      use hex
       implicit none
 !     d is represents if message is to be encypted or deciphered
 !     i is an index variable
 !     key & message represent the key and message in bit format
 !     k & m represent the key and message in byte format
 !     kb & mb represent the key and message in hexdigit format
-      integer :: d, i
+      integer :: d, i, l
       integer, dimension(0:7,0:15) :: k
       integer, dimension(0:7,0:7,0:1) :: m
       integer, dimension(0:127) :: key
       integer, dimension(0:127) :: message
+      character(len=11) :: userInput
       equivalence (k(0,0),key(0)),(m(0,0,0),message(0))
 
-      integer, dimension(0:31) :: kb, mb, ciphertext
+      integer, dimension(0:31) :: kb, mb = 0, ciphertext
 
 !     Get message in key from user input
       write(*,1003)
       read(*,1004) (kb(i),i=0,31)
 
-      write(*,1005)
-      read(*,1006) (mb(i),i=0,31)
+      call readWord(userInput)
+!      write(*,*) (userInput)
+      call word2hex(userInput, mb, l)
+!      write(*,1007)(mb(i), i=0, 31)
+      call printhex(mb, l)
+
 
 !     convert to bit format
       call expand(message,mb,32)
