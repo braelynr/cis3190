@@ -138,7 +138,8 @@
       integer, dimension(0:1) :: c
 
 !     S-box permutations
-      integer, dimension(0:15) :: s0 = (/12,15,7,10,14,13,11,0,2,6,3,1,9,4,5,8/), s1 = (/7,2,14,9,3,11,0,4,12,13,1,10,6,15,8,5/)
+      integer, dimension(0:15) :: s0 = (/12,15,7,10,14,13,11,0,2,6, &
+      3,1,9,4,5,8/), s1 = (/7,2,14,9,3,11,0,4,12,13,1,10,6,15,8,5/)
 
       equivalence (c(0),h),(c(1),l)
 
@@ -178,7 +179,8 @@
 
 !             key interruption and diffusion
               do kk = 0,7,1
-                  m(kk,mod(o(kk)+jj,8),h0)=mod(k(pr(kk),kc)+tr(pr(kk))+m(kk,mod(o(kk)+jj,8),h0),2)
+                  m(kk,mod(o(kk)+jj,8),h0)=mod(k(pr(kk),kc)+ &
+                  tr(pr(kk))+m(kk,mod(o(kk)+jj,8),h0),2)
               end do
               if (jj < 7 .or. d == 1) kc=mod(kc+1,16)
           end do

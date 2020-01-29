@@ -20,10 +20,11 @@
       write(*,1003)
       read(*,1004) (kb(i),i=0,31)
 
+!     Call function to receive word to encrypt
       call readWord(userInput)
-!      write(*,*) (userInput)
+!     Call function to convert word to hex
       call word2hex(userInput, mb, l)
-!      write(*,1007)(mb(i), i=0, 31)
+!     Print out the converted word
       call printhex(mb, l)
 
 
@@ -42,7 +43,7 @@
       write(*,*) ('Encrypted message')
       call compress(message,ciphertext,32)
       write(*,1002)
-      write(*,1007) (ciphertext(i),i=0, 31)
+      write(*,1006) (ciphertext(i),i=0, 31)
 
 !     Decipher
       d=1
@@ -55,9 +56,9 @@
       call compress(message,mb,32)
       call compress(key,kb,32)
       write(*,1003)
-      write(*,1007) (kb(i),i=0,31)
+      write(*,1006) (kb(i),i=0,31)
       write(*,1005)
-      write(*,1007) (mb(i),i=0,31)
+      write(*,1006) (mb(i),i=0,31)
 
 !     Formats for optional bit output
 ! 1000  format(' key '/16(1x,i1))
@@ -69,7 +70,6 @@
 1004  format(32z1.1)
 1005  format(' plaintext ')
 1006  format(32z1.1)
-1007  format(32z1.1)
       end program luc
 
 !     subroutine to expand the message from byte to bit format
@@ -143,7 +143,8 @@
       integer, dimension(0:1) :: c
 
 !     S-box permutations
-      integer, dimension(0:15) :: s0 = (/12,15,7,10,14,13,11,0,2,6,3,1,9,4,5,8/), s1 = (/7,2,14,9,3,11,0,4,12,13,1,10,6,15,8,5/)
+      integer, dimension(0:15) :: s0 = (/12,15,7,10,14,13,11,0,2,6, &
+      3,1,9,4,5,8/), s1 = (/7,2,14,9,3,11,0,4,12,13,1,10,6,15,8,5/)
 
       equivalence (c(0),h),(c(1),l)
 
@@ -183,7 +184,8 @@
 
 !             key interruption and diffusion
               do kk = 0,7,1
-                  m(kk,mod(o(kk)+jj,8),h0)=mod(k(pr(kk),kc)+tr(pr(kk))+m(kk,mod(o(kk)+jj,8),h0),2)
+                  m(kk,mod(o(kk)+jj,8),h0)=mod(k(pr(kk),kc)+ &
+                  tr(pr(kk))+m(kk,mod(o(kk)+jj,8),h0),2)
               end do
               if (jj < 7 .or. d == 1) kc=mod(kc+1,16)
           end do

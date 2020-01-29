@@ -1,10 +1,13 @@
       module hex
           implicit none
       contains
-!         Subroutine to obtain input for a word to be encrypted by the user
+!         Subroutine to obtain input from the user
           subroutine readWord(w)
+!         w = the user submitted word in ASCII
           character(len=11), intent(out) :: w
 
+!         Continue asking for input while the word is either
+!              not entered or too long
           do while(len_trim(w) == 11)
               write(*,*) (' Enter word:')
               read(*,*) w
@@ -14,7 +17,9 @@
 
 !         Subroutine to convert the user input into hexadecimal
           subroutine word2hex(w, h, l)
-
+!         w = the ASCII word inputted by the user
+!         h = the hexidecimal word to be sent to lucifer
+!         l = the length of the hexidecimal array
           character (len = 11), intent(in) :: w
           integer, intent(out), dimension(0:31) :: h
           integer, intent(out) :: l
@@ -25,7 +30,9 @@
 
           j = 0
           do i = 1, len_trim(w)
+!             Convert the ascii character to hex
               write(tempH, '(Z2)') w(i:i)
+!             Split and store the 2 hex digits
               read(tempH(1:1),'(Z1)')hex(1)
               read(tempH(2:2),'(Z1)')hex(2)
               h(j) = hex(1)
@@ -38,6 +45,8 @@
 
 !         Subroutine to print the hex version of the word
           subroutine printhex(h, l)
+!         l = the length of the hexidecimal array
+!         h = the hexidecimal word
           integer, intent(in) :: l
           integer, intent(in), dimension(0:l) :: h
           integer :: i
