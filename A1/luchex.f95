@@ -7,14 +7,14 @@
 !     k & m represent the key and message in byte format
 !     kb & mb represent the key and message in hexdigit format
       integer :: d, i, l
-      integer, dimension(0:7,0:15) :: k
-      integer, dimension(0:7,0:7,0:1) :: m
-      integer, dimension(0:127) :: key
-      integer, dimension(0:127) :: message
+      integer, dimension(0:7,0:15) :: k = 0
+      integer, dimension(0:7,0:7,0:1) :: m = 0
+      integer, dimension(0:127) :: key = 0
+      integer, dimension(0:127) :: message = 0
       character(len=11) :: userInput
       equivalence (k(0,0),key(0)),(m(0,0,0),message(0))
 
-      integer, dimension(0:31) :: kb, mb = 0, ciphertext
+      integer, dimension(0:31) :: kb = 0, mb = 0, ciphertext
 
 !     Get message in key from user input
       write(*,1003)
