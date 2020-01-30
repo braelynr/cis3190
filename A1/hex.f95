@@ -1,3 +1,8 @@
+!
+!     Braelyn Rotman
+!     1006740
+!     Due January 31
+!
       module hex
           implicit none
       contains
@@ -11,7 +16,9 @@
           do while(len_trim(w) == 11)
               write(*,*) (' Enter word:')
               read(*,*) w
-              if(len_trim(w) == 11) write(*,*) ('Invalid Word Length')
+              if(len_trim(w) == 11) then
+                  write(*,*) ('Invalid Word Length')
+              end if
           end do
           end subroutine readWord
 

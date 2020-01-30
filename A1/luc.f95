@@ -1,3 +1,8 @@
+!
+!     Braelyn Rotman
+!     1006740
+!     Due January 31
+!
       program luc
 
       implicit none
@@ -7,10 +12,10 @@
 !     k & m represent the key and message in byte format
 !     kb & mb represent the key and message in hexdigit format
       integer :: d, i
-      integer, dimension(0:7,0:15) :: k
-      integer, dimension(0:7,0:7,0:1) :: m
-      integer, dimension(0:127) :: key
-      integer, dimension(0:127) :: message
+      integer, dimension(0:7,0:15) :: k = 0
+      integer, dimension(0:7,0:7,0:1) :: m = 0
+      integer, dimension(0:127) :: key = 0
+      integer, dimension(0:127) :: message = 0
       equivalence (k(0,0),key(0)),(m(0,0,0),message(0))
 
       integer, dimension(0:31) :: kb, mb, ciphertext
@@ -148,10 +153,14 @@
       h1=1
 
       kc=0
-      if (d == 1) kc=8
+      if (d == 1) then
+          kc=8
+      end if
 
       do ii = 1,16,1
-          if (d==1) kc=mod(kc+1,16)
+          if (d==1) then
+              kc=mod(kc+1,16)
+          end if
 !         ks = the index of the transform control byte
           ks=kc
 
@@ -182,7 +191,9 @@
                   m(kk,mod(o(kk)+jj,8),h0)=mod(k(pr(kk),kc)+ &
                   tr(pr(kk))+m(kk,mod(o(kk)+jj,8),h0),2)
               end do
-              if (jj < 7 .or. d == 1) kc=mod(kc+1,16)
+              if (jj < 7 .or. d == 1) then
+                  kc=mod(kc+1,16)
+              end if
           end do
 
 !         swapping halves of the message
