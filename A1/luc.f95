@@ -1,6 +1,7 @@
 !
 !     Braelyn Rotman
 !     1006740
+!     Assignment 1 - Fortran
 !     Due January 31
 !
       program luc

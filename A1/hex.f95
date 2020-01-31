@@ -1,6 +1,7 @@
 !
 !     Braelyn Rotman
 !     1006740
+!     Assignment 1 - Fortran
 !     Due January 31
 !
       module hex
@@ -14,7 +15,7 @@
 !         Continue asking for input while the word is either
 !              not entered or too long
           do while(len_trim(w) == 11)
-              write(*,*) (' Enter word:')
+              write(*,*) ('Please Enter Word to Encrypt (Max 10 Characters):')
               read(*,*) w
               if(len_trim(w) == 11) then
                   write(*,*) ('Invalid Word Length')
@@ -30,6 +31,7 @@
           character (len = 11), intent(in) :: w
           integer, intent(out), dimension(0:31) :: h
           integer, intent(out) :: l
+          
           character (len=2) :: tempH
           integer, dimension(1:2) :: hex
 

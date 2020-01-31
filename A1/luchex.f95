@@ -1,6 +1,7 @@
 !
 !     Braelyn Rotman
 !     1006740
+!     Assignment 1 - Fortran
 !     Due January 31
 !
       program luc
@@ -60,7 +61,7 @@
 
       call compress(message,mb,32)
       call compress(key,kb,32)
-      write(*,1003)
+      write(*,1007)
       write(*,1006) (kb(i),i=0,31)
       write(*,1005)
       write(*,1006) (mb(i),i=0,31)
@@ -70,8 +71,8 @@
 ! 1001  format(' plain '/16(1x,i1))
 
 1002  format(' ciphertext ')
-1003  format(' key ')
-
+1003  format(' Please Enter a Hexadecimal Key ')
+1007  format(' key ')
 1004  format(32z1.1)
 1005  format(' plaintext ')
 1006  format(32z1.1)
