@@ -71,7 +71,7 @@
 ! 1001  format(' plain '/16(1x,i1))
 
 1002  format(' ciphertext ')
-1003  format(' Please Enter a Hexadecimal Key ')
+1003  format(' Please Enter a Hexadecimal Key (A-F, 0-9): ')
 1007  format(' key ')
 1004  format(32z1.1)
 1005  format(' plaintext ')
