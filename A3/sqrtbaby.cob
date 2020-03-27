@@ -1,11 +1,18 @@
+*> Assignment 3 - Cobol Re-engineering
+*> March 27, 2020
+*> Braelyn Rotman
+*> 1006740
+
 identification division.
 program-id. sqrtbaby.
+
 environment division.
 input-output section.
 file-control.
     select sysin assign to keyboard
     organization is line sequential.
     select standard-output assign to display.
+
 data division.
 file section.
 fd standard-output.
@@ -17,17 +24,25 @@ working-storage section.
 77 x    pic 9(11)v9(6).
 77 y    pic 9(11)v9(6).
 77 temp pic s9(11)v9(6).
+
+*> diff is the accuracy required. It is set to 0.001
+*> z is the number to find the square root of
+*> k is for iterations
+*> x is the previous estimate R(k-1)
+*> y is the current estimate R(k)
+*> temp is used to calculate the accuracy
+
 01 eof  pic x(01) value "f".
-01 in-card.
-   02 in-z   pic s9(10)v9(6) sign leading separate.
-01 print-line.
-   02 filler pic x value space.
-   02 out-z  pic z(11)9.9(6).
-   02 filler pic x(5) value spaces.
-   02 out-y  pic z(11)9.9(6).
+01 in-z   pic s9(10)v9(6) sign leading separate.
+01 out-y  pic z(11)9.9(6).
+
+*> eof is used to determine when the user is done inputting numbers (originally the end of the input file)
+*> in-z is the user input
+*> out-y is the resulting square root
 
 procedure division.
 
+*> S1 requests user input until the number 0 is entered (originally until the end of the file is reached)
 S1.
     perform until eof = "t"
         display "Enter a number: " with no advancing
@@ -40,6 +55,7 @@ S1.
             if in-z > 0 then
                 perform B1
             end-if
+            *> This will display if a negative number is entered
             display "INVALID INPUT"
             display " "
         end-if
@@ -47,6 +63,7 @@ S1.
     perform finish.
 end-S1.
 
+*> B1 runs through the algorithm until the accuracy is reached or 1000 iterations are completed
 B1.
     move .00100 to diff.
     move in-z to z.
@@ -57,16 +74,19 @@ B1.
     display " ".
 end-B1.
 
+*> S1 calculates each estimate
 S2.
     compute y rounded = 0.5 * (x + z / x).
     compute temp = y - x.
     if temp < 0 then
         compute temp = - temp
     end-if.
+
+    *> if the accuracy is not reached the algorithm will continue
     if temp / (y + x) > diff then
         perform E2
     else
-        move in-z to out-z
+        *> The accuracy has been reached
         move y to out-y
 
         display "Square Root = " out-y
@@ -75,6 +95,7 @@ S2.
     end-if.
 end-S2.
 
+*> E2 sets the current estimate to the previous estimate for the next iteration
 E2.
     move y to x.
 end-E2.
