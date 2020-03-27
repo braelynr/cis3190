@@ -10,47 +10,40 @@ working-storage section.
 77 x    pic 9(11)v9(6).
 77 y    pic 9(11)v9(6).
 77 temp pic s9(11)v9(6).
-01 print-line.
-   02 filler pic x value space.
-   02 out-z  pic z(11)9.9(6).
-   02 filler pic x(5) value spaces.
-   02 out-y  pic z(11)9.9(6).
+01 out-y  pic z(11)9.9(6).
 
 linkage section.
 01 in-z   pic s9(10)v9(6) sign leading separate.
 
 procedure division using in-z.
 
-B1.
-    move .00100 to diff.
-    move in-z to z.
-    compute x rounded = z / 2.
-    perform S2 thru E2 varying k from 1 by 1
-        until k > 1000
-    display "ATTEMPT ABORTED,TOO MANY ITERATIONS".
-    display " ".
-end-B1.
+squareroot.
+  move .00100 to diff.
+  move 1 to k.
+  move in-z to z.
+  compute x rounded = z / 2.
 
-S2.
-    compute y rounded = 0.5 * (x + z / x).
-    compute temp = y - x.
+  perform until k > 1000
+    compute y rounded = 0.5 * (x + z / x)
+    compute temp = y - x
     if temp < 0 then
         compute temp = - temp
-    end-if.
+    end-if
     if temp / (y + x) > diff then
-        perform E2
+        move y to x
     else
-        move in-z to out-z
         move y to out-y
-
+        display "k = " k
         display "Square Root = " out-y
         display " "
         exit program
-    end-if.
-end-S2.
+    end-if
+    compute k = k + 1
+  end-perform.
 
-E2.
-    move y to x.
-end-E2.
+  display "ATTEMPT ABORTED,TOO MANY ITERATIONS".
+  display " ".
+end-squareroot.
+
 
 exit program.
