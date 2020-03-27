@@ -100,7 +100,7 @@ E2.
     move y to x.
 end-E2.
 
-FINISH.
+finish.
     close sysin, standard-output.
     stop run.
-end-FINISH.
+end-finish.
