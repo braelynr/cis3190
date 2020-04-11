@@ -16,9 +16,9 @@
       p = 0
 
       write(*,*) "RUSSIAN PEASANT MULTIPLICATION"
-      write(*,*) "Enter Integer 1: "
+      write(*,*) "Enter Positive Integer 1: "
       read(*,*) m
-      write(*,*) "Enter Integer 2: "
+      write(*,*) "Enter Positive Integer 2: "
       read(*,*) n
 
 !     calculate the product using the recursive function
