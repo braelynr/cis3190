@@ -74,9 +74,9 @@ end multiply;
 
 begin
 
-  put("Enter Integer 1: ");
+  put("Enter Positive Integer 1: ");
   get(m);
-  put("Enter Integer 2: ");
+  put("Enter Positive Integer 2: ");
   get(n);
 
   new_line;

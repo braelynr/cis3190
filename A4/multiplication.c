@@ -69,9 +69,9 @@ int main()
   struct timeval start, end;
   float execTime, sec, msec;
 
-  printf("Enter Integer 1: ");
+  printf("Enter Positive Integer 1: ");
   scanf("%d", &m);
-  printf("Enter Integer 2: ");
+  printf("Enter Positive Integer 2: ");
   scanf("%d", &n);
 
   printf("\nRUSSIAN PEASANT MULTIPLICATION\n");
